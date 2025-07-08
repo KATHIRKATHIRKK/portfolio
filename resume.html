@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kathireshwaran's Resume</title>
+    <style>
+        :root {
+            --primary-color: #39B24A;
+            --text-color: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        
+        .resume-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .resume-viewer {
+            flex: 1;
+            width: 100%;
+            border: none;
+            background-color: white;
+        }
+        
+        .download-section {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+        
+        .download-btn {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 12px 25px;
+            border-radius: 5px;
+            border: none;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background-color: #2e8b3d;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow-color);
+        }
+        
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        
+        .status-message {
+            background-color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            color: var(--primary-color);
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            max-width: 200px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .download-section {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .download-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .download-section {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .status-message {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-container">
+        <!-- Full-screen Resume Viewer -->
+        <iframe class="resume-viewer" 
+               src="https://drive.google.com/file/d/1GWE14dDoYUZDzB4dKEBbEbM-rAOHU-u1/preview" 
+allow="autoplay"> 
+                allow="autoplay">
+        </iframe>
+        
+        <!-- Download Button Section -->
+        <div class="download-section">
+            <div id="status" class="status-message"></div>
+            <button id="downloadBtn" class="download-btn">
+                <i class="fas fa-download"></i> Download Resume
+            </button>
+        </div>
+    </div>
+
+    <!-- Font Awesome for download icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.getElementById('downloadBtn');
+            const statusElement = document.getElementById('status');
+            
+            // Direct download link from your Google Drive
+            const downloadLink = 'https://drive.google.com/uc?export=download&id=1GWE14dDoYUZDzB4dKEBbEbM-rAOHU-u1';
+            
+            downloadBtn.addEventListener('click', function() {
+                // Show downloading status
+                statusElement.textContent = 'Downloading your resume...';
+                statusElement.style.opacity = '1';
+                
+                // Create temporary download link
+                const link = document.createElement('a');
+                link.href = downloadLink;
+                link.setAttribute('download', 'Kathireshwaran_Resume.pdf');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Update status after download
+                setTimeout(() => {
+                    statusElement.textContent = 'Download complete!';
+                    setTimeout(() => {
+                        statusElement.style.opacity = '0';
+                    }, 2000);
+                }, 1500);
+            });
+            
+            // Button animation on page load
+            setTimeout(() => {
+                downloadBtn.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    downloadBtn.style.transform = 'scale(1)';
+                }, 300);
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

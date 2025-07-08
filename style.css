@@ -1,0 +1,567 @@
+<style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --gradient-start: #3a86ff;
+            --gradient-end: #8338ec;
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
+
+        .dark-theme {
+            --primary-color: #4e9eff;
+            --secondary-color: #9b5eff;
+            --text-color: #e1e1e1;
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --gradient-start: #2d74db;
+            --gradient-end: #7332c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all var(--transition-speed);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: var(--card-bg);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-start);
+            background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            bottom: -5px;
+            left: 0;
+            transition: width var(--transition-speed);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            transition: color var(--transition-speed);
+        }
+
+        .theme-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-color);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: white;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            padding: 0.8rem 2rem;
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: inline-block;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Bio Section */
+        .bio-section {
+            padding: 5rem 0;
+        }
+
+        .bio-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .bio-image {
+            flex: 1;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .bio-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .bio-content {
+            flex: 2;
+        }
+
+        .bio-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio-content .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Internships Page */
+        .internships-section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border-radius: 2px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--gradient-start), var(--gradient-end));
+            transform: translateX(-50%);
+        }
+
+        .internship-card {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 45%;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .internship-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .internship-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 55%;
+        }
+
+        .left::before {
+            right: -11%;
+            transform: translate(0, -50%);
+        }
+
+        .right::before {
+            left: -11%;
+            transform: translate(0, -50%);
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 2px solid var(--primary-color);
+        }
+
+        .company-logo img {
+            width: 80%;
+            height: auto;
+        }
+
+        .internship-date {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .internship-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .internship-company {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        /* Projects Page */
+        .projects-section {
+            padding: 5rem 0;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .project-thumbnail {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%);
+            opacity: 0;
+            transition: opacity var(--transition-speed);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-view-btn {
+            padding: 0.5rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color var(--transition-speed);
+        }
+
+        .project-view-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            padding: 3rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -5px 15px var(--shadow-color);
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-speed);
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .timeline::before {
+                left: 31px;
+            }
+
+            .internship-card {
+                width: calc(100% - 80px);
+                left: 80px;
+            }
+
+            .left::before, .right::before {
+                left: -50px;
+            }
+
+            .bio-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .bio-image {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: 0 5px 15px var(--shadow-color);
+                transform: translateY(-150%);
+                transition: transform var(--transition-speed);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                height: 100vh;
+            }
+
+            .internship-card {
+                width: calc(100% - 50px);
+                left: 50px;
+                padding: 1.5rem;
+            }
+
+            .left::before, .right::before {
+                left: -35px;
+            }
+
+            .timeline::before {
+                left: 16px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
